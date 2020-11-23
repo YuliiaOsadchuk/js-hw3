@@ -1,0 +1,23 @@
+.function-wrapper {
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.input-style {
+    width: max-content;
+    height: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.button-style {
+    outline: none;
+}
+
+.line {
+    width: 250px;
+    height: 1px;
+    background-color: #cccccc;
+}
