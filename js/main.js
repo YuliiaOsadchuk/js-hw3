@@ -97,7 +97,7 @@ const convertCurrency = (money) => {
 
     let currencySum = 0;
     if (!currencyUAH && !currencyDol) {
-        alert("Error!");
+        alert("Невірний формат. Наприклад, для вказання доларів вкажіть 100$, для гривень 100Uah");
         return currencySum;
     }
 
@@ -138,6 +138,7 @@ const handleRandomPassword = () => {
 const deleteLetter = (word, letterToDelete) => {
 
     let newWord = "";
+    word = word.toLowerCase();
     for (i = 0; i < word.length; i++) {
         if (word[i] === letterToDelete) continue;
         newWord += word[i];
