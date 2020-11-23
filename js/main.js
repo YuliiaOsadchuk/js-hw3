@@ -14,8 +14,11 @@ const handleMaxDigit = () => {
 
 const powNumber = (number, pow) => {
     let powedNumber = 1;
-    for (i = 0; i < pow; i++) {
+    for (i = 0; i < Math.abs(pow); i++) {
         powedNumber *= number;
+    }
+    if (pow < 0) {
+        powedNumber = 1 / (powedNumber);
     }
     return powedNumber;
 }
@@ -119,7 +122,6 @@ const getRandomPassword = (passwordLength) => {
     let password = "";
     const min = 0;
     const max = 9;
-    if (password === "") passwordLength = 8;
     for (i = 0; i < passwordLength; i++) {
         let randomNumber = min + Math.random() * (max + 1 - min);
         password += Math.floor(randomNumber);
@@ -130,7 +132,7 @@ const getRandomPassword = (passwordLength) => {
 const handleRandomPassword = () => {
     const passwordInputNode = document.getElementById("password-input");
     const passwordOutputNode = document.getElementById("password-output");
-    passwordOutputNode.textContent = "Сгенерований пароль: " + getRandomPassword(passwordInputNode.value);
+    passwordOutputNode.textContent = "Сгенерований пароль: " + getRandomPassword(passwordInputNode.value || 8);
 }
 
 const deleteLetter = (word, letterToDelete) => {
