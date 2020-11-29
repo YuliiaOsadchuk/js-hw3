@@ -1,15 +1,15 @@
-const getMaxDigit = (numbers) => {
-    let maxDigit = numbers[0];
-    for (let i = 1; i < numbers.length; i++) {
-        if (numbers[i] > maxDigit) maxDigit = numbers[i];
-    }
-    return maxDigit;
+const getArrayFromStr = (array) => {
+    const newArray = array.split('');
+    return newArray;
 }
 
-const handleMaxDigit = () => {
-    const maxDigitInputNode = document.getElementById("max-digit-input");
-    const maxDigitOutputNode = document.getElementById("max-digit-output");
-    maxDigitOutputNode.textContent = "Максимальне число: " + getMaxDigit(maxDigitInputNode.value);
+const getMaxDigit = (numbers) => {
+    const numberArray = getArrayFromStr(numbers);
+    let maxDigit = 0;
+    numberArray.forEach((number) => {
+        if (number > maxDigit) maxDigit = number;
+    })
+    return maxDigit;
 }
 
 const powNumber = (number, pow) => {
@@ -23,30 +23,18 @@ const powNumber = (number, pow) => {
     return powedNumber;
 }
 
-const handlePowNumber = () => {
-    const numberInputNode = document.getElementById("number-input");
-    const powInputNode = document.getElementById("pow-input");
-    const powNumberOutputNode = document.getElementById("pow-output");
-    powNumberOutputNode.textContent = "Результат обчислення: " + powNumber(numberInputNode.value, powInputNode.value);
-}
-
 const formatName = (name) => {
     name = name.toUpperCase();
     let formattedName = name[0];
     name = name.toLowerCase();
-    for (let i = 1; i < name.length; i++) {
-        formattedName += name[i];
-    }
+    name.forEach((letter) => {
+        formattedName += letter;
+    })
     return formattedName;
 }
 
-const handleFormatName = () => {
-    const nameInputNode = document.getElementById("format-name-input");
-    const nameOutputNode = document.getElementById("format-name-output");
-    nameOutputNode.textContent = "Відформатоване ім'я: " + formatName(nameInputNode.value);
-}
-
 const countSalary = (salary) => {
+    if (salary < 0) salary = 0;
     const taxPdv = 18;
     const taxPf = 1.5;
     const tax = (taxPdv + taxPf) / 100;
@@ -54,40 +42,19 @@ const countSalary = (salary) => {
     return salary;
 }
 
-const handleCountSalary = () => {
-    const countSalaryInputNode = document.getElementById("count-salary-input");
-    const countSalaryOutputNode = document.getElementById("count-salary-output");
-    countSalaryOutputNode.textContent = "Розмір заробітньої плати після вирахування податків: " + countSalary(countSalaryInputNode.value);
-}
-
 const getRandomNumber = (minNumber, maxNumber) => {
     const randomNumber = minNumber + Math.random() * (maxNumber + 1 - minNumber);
     return Math.floor(randomNumber);
 }
 
-const handleRandomNumber = () => {
-    const randomFirstNumberInputNode = document.getElementById("random-min-number-input");
-    const randomSecondInputNode = document.getElementById("random-max-number-input");
-    const randomNumberOutputNode = document.getElementById("random-number-output");
-    randomNumberOutputNode.textContent = "Випадкове число в заданому діапазоні: " + getRandomNumber(+(randomFirstNumberInputNode.value), +(randomSecondInputNode.value));
-}
-
 const countLetter = (word, letterToCount) => {
     let count = 0;
-    for (i = 0; i < word.length; i++) {
-        if (word[i] !== letterToCount) continue;
-        count++;
-    }
+    const wordArray = getArrayFromStr(word);
+    wordArray.forEach((letter) => {
+        if (letter === letterToCount) count++;
+    })
     return count;
 }
-
-const handleCountLetter = () => {
-    const wordInputNode = document.getElementById("word-input");
-    const letterInputNode = document.getElementById("letter-input");
-    const countLetterOutputNode = document.getElementById("letter-output");
-    countLetterOutputNode.textContent = "Кількість літер у слові: " + countLetter(wordInputNode.value, letterInputNode.value);
-}
-
 
 const convertCurrency = (money) => {
     const currencyChangeDollar = 25;
@@ -111,13 +78,6 @@ const convertCurrency = (money) => {
     return currencySum;
 }
 
-const handleConvertCurrency = () => {
-    const currencyInputNode = document.getElementById("currency-input");
-    const currencyOutputNode = document.getElementById("currency-output");
-    currencyOutputNode.textContent = "Результат: " + convertCurrency(currencyInputNode.value);
-}
-
-
 const getRandomPassword = (passwordLength) => {
     let password = "";
     const min = 0;
@@ -129,28 +89,14 @@ const getRandomPassword = (passwordLength) => {
     return password;
 }
 
-const handleRandomPassword = () => {
-    const passwordInputNode = document.getElementById("password-input");
-    const passwordOutputNode = document.getElementById("password-output");
-    passwordOutputNode.textContent = "Сгенерований пароль: " + getRandomPassword(passwordInputNode.value || 8);
-}
-
 const deleteLetter = (word, letterToDelete) => {
-
     let newWord = "";
     word = word.toLowerCase();
-    for (i = 0; i < word.length; i++) {
-        if (word[i] === letterToDelete) continue;
-        newWord += word[i];
-    }
+    const wordArray = getArrayFromStr(word);
+    wordArray.forEach((letter) => {
+        if (letter !== letterToDelete) newWord += letter;
+    })
     return newWord;
-}
-
-const handleDeleteLetter = () => {
-    const deleteWordInputNode = document.getElementById("delete-word-input");
-    const deleteLetterInputNode = document.getElementById("delete-letter-input");
-    const deleteLetterOutputNode = document.getElementById("delete-letter-output");
-    deleteLetterOutputNode.textContent = "Результат: " + deleteLetter(deleteWordInputNode.value, deleteLetterInputNode.value);
 }
 
 const isPalindrom = (word) => {
@@ -161,10 +107,4 @@ const isPalindrom = (word) => {
         newWord += word[i];
     }
     return (word === newWord);
-}
-
-const handleIsPalindrom = () => {
-    const palindromInputNode = document.getElementById("palindrom-input");
-    const palindromOutputNode = document.getElementById("palindrom-output");
-    palindromOutputNode.textContent = "Слово або вираз є паліндромом: " + isPalindrom(palindromInputNode.value);
 }
